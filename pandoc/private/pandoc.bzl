@@ -19,6 +19,9 @@ def _pandoc_implementation(ctx):
     if ctx.attr.embed_resources:
         args.add("--embed-resources")
 
+    if ctx.attr.css:
+        args.add("-c", ctx.attr.css) 
+
     if ctx.attr.to:
         args.add("--to", ctx.attr.to)
 
@@ -62,6 +65,7 @@ pandoc = rule(
         "embed_resources": attr.bool(
             default = True,
         ),
+        "css": attr.string(),
         "toc": attr.bool(
             default = False,
         ),
