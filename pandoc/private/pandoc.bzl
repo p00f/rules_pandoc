@@ -16,6 +16,9 @@ def _pandoc_implementation(ctx):
         args.add("--standalone")
         args.add("--metadata", "title=%s" % ctx.attr.title)
 
+    if ctx.attr.embed_resources:
+        args.add("--embed-resources")
+
     if ctx.attr.to:
         args.add("--to", ctx.attr.to)
 
@@ -55,6 +58,9 @@ pandoc = rule(
         "title": attr.string(),
         "standalone": attr.bool(
             default = False,
+        ),
+        "embed_resources": attr.bool(
+            default = True,
         ),
         "toc": attr.bool(
             default = False,
